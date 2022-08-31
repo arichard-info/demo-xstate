@@ -8,9 +8,11 @@
 .btn-primary {
 	@apply bg-blue-500 text-white;
 }
-
 .btn-secondary {
 	@apply text-blue-600 bg-blue-200;
+}
+.btn-error {
+	@apply bg-red-400 text-white;
 }
 
 .btn-secondary:hover {
@@ -19,6 +21,9 @@
 
 .btn-primary:hover {
 	@apply bg-blue-700;
+}
+.btn-error:hover {
+	@apply bg-red-500;
 }
 
 .btn-stretched {
