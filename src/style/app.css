@@ -6,21 +6,21 @@
 	@apply font-bold py-2 px-4 rounded inline-flex items-center justify-center;
 }
 .btn-primary {
-	@apply bg-blue-500 text-white;
+	@apply bg-yellow-500 text-white;
 }
 .btn-secondary {
-	@apply text-blue-600 bg-blue-200;
+	@apply bg-yellow-200;
 }
 .btn-error {
 	@apply bg-red-400 text-white;
 }
 
 .btn-secondary:hover {
-	@apply bg-blue-300;
+	@apply bg-yellow-300;
 }
 
 .btn-primary:hover {
-	@apply bg-blue-700;
+	@apply bg-yellow-600;
 }
 .btn-error:hover {
 	@apply bg-red-500;
