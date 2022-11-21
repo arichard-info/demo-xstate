@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply bg-gray-200;
+	height: 100vh;
+	padding-top: 100px;
+}
+
+#app {
+	width: 100%;
+	max-width: 500px;
+	margin: auto;
+}
+
+.card {
+	@apply border border-gray-400 bg-white rounded p-4;
+}
+
+h1 {
+	@apply text-gray-700 font-bold text-4xl mb-4;
+}
