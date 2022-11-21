@@ -1,65 +1,65 @@
 <script>
+	import { interpret } from 'xstate';
+
+	import ApiToggle from 'common/components/ApiToggle.svelte';
 	import TextField from 'common/components/TextField.svelte';
 	import Button from 'common/components/Button.svelte';
+	import Loader from 'common/components/Loader.svelte';
+	import IconSuccess from 'common/components/IconSuccess.svelte';
+	import IconError from 'common/components/IconSuccess.svelte';
 
-	import * as api from 'common/api';
+	import machine from './state';
 
-	let username = '';
-	let password = '';
-
-	let loading = false;
-	let error = false;
-	let loggedIn = false;
-
-	function handleRetry() {
-		error = false;
-	}
-
-	async function handleLogout() {
-		loggedIn = false;
-	}
-
-	async function handleSubmit() {
-		if (!password || !username || loading) return;
-
-		loading = true;
-		await api.login();
-		loading = false;
-		loggedIn = true;
-	}
+	const service = interpret(machine, { devTools: true }).start();
 </script>
 
-{#if loggedIn}
+{#if $service.matches('confirmation')}
 	<h1>Connecté</h1>
-	<div class="card">
-		<Button on:click={handleLogout}>Log out</Button>
+	<div class="card flex flex-col items-center">
+		<IconSuccess class="h-16 w-16 text-green-600" />
+		<h2>Bienvenue <strong>{$service.context.username}</strong> !</h2>
 	</div>
-{:else if error}
+{/if}
+{#if $service.matches('error')}
 	<h1>Erreur</h1>
-	<div class="card">
-		<Button on:click={handleRetry}>Retry</Button>
+	<div class="card flex flex-col items-center">
+		<IconError class="h-16 w-16 text-red-600" />
+		<h2>Une erreur est survenue</h2>
+		<Button on:click={() => service.send('RETRY')}>Nouvelle tentative</Button>
 	</div>
-{:else}
+{/if}
+{#if ['editing', 'submitting'].some($service.matches)}
 	<h1>Connexion</h1>
 	<div class="card">
-		<form id="" action="#" on:submit|preventDefault={handleSubmit}>
+		<form id="" action="#" on:submit|preventDefault={() => service.send('SUBMIT')}>
 			<TextField
 				label="Email"
-				bind:value={username}
-				disabled={loading}
+				value={$service.context.username}
+				on:input={(e) => service.send({ type: 'EDIT_USERNAME', value: e.target.value })}
+				disabled={$service.matches('SUBMITTING')}
 				placeholder="user@email.com"
 				id="username"
+				autocomplete="username"
 			/>
 			<TextField
+				label="Mot de passe"
+				value={$service.context.password}
+				on:input={(e) => service.send({ type: 'EDIT_PASSWORD', value: e.target.value })}
 				type="password"
 				class="mt-2"
-				label="Mot de passe"
-				bind:value={password}
-				disabled={loading}
+				disabled={$service.matches('SUBMITTING')}
 				placeholder="••••••"
 				id="password"
+				autocomplete="current-password"
 			/>
-			<Button type="submit" variant="primary" stretched class="mt-5">Connexion</Button>
+			<Button type="submit" variant="primary" stretched class="mt-5">
+				{#if $service.matches('submitting')}
+					<Loader class="-ml-1 mr-3 h-5 w-5 text-yellow-500" />
+				{/if}
+				Connexion
+			</Button>
 		</form>
 	</div>
 {/if}
+
+<ApiToggle />

@@ -1,3 +1,5 @@
+import { getApiStatus } from './utils';
+
 export const login = () => {
 	return new Promise((resolve, reject) =>
 		setTimeout(() => {
@@ -6,16 +8,4 @@ export const login = () => {
 			return reject(new Error());
 		}, 1000)
 	);
-};
-
-const localStorageKey = 'apiUp';
-
-export const getApiStatus = (defaultValue = true) => {
-	if (window.localStorage.getItem(localStorageKey))
-		return window.localStorage.getItem(localStorageKey) === 'true';
-	return defaultValue;
-};
-
-export const setApiStatus = (value) => {
-	window.localStorage.setItem(localStorageKey, value);
 };

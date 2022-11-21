@@ -1,5 +1,5 @@
 <script>
-	import { setApiStatus, getApiStatus } from './../api';
+	import { setApiStatus, getApiStatus } from './../api/utils';
 	let checked = getApiStatus();
 
 	const handleChange = () => {

@@ -29,12 +29,6 @@
 		password = '';
 	};
 
-	const handleLogout = async () => {
-		loggedIn = false;
-		username = '';
-		password = '';
-	};
-
 	const handleSubmit = async () => {
 		if (!password || !username || loading) return;
 		loading = true;
@@ -54,7 +48,6 @@
 	<div class="card flex flex-col items-center">
 		<IconSuccess class="h-16 w-16 text-green-600" />
 		<h2>Bienvenue <strong>{username}</strong> !</h2>
-		<Button on:click={handleLogout}>Se déconnecter</Button>
 	</div>
 {:else if error}
 	<h1>Erreur</h1>
