@@ -1,6 +1,5 @@
 <script>
 	export let label = '';
-	export let value = '';
 	export let id = '';
 	export let type = '';
 
@@ -13,9 +12,9 @@
 		{label}
 	</label>
 	{#if type === 'password'}
-		<input type="password" {id} bind:value {...$$restProps} />
+		<input type="password" {id} on:input {...$$restProps} />
 	{:else}
-		<input type="text" {id} bind:value {...$$restProps} />
+		<input type="text" {id} on:input {...$$restProps} />
 	{/if}
 </div>
 

@@ -1,6 +1,10 @@
 <script>
+	import ApiToggle from 'common/components/ApiToggle.svelte';
 	import TextField from 'common/components/TextField.svelte';
 	import Button from 'common/components/Button.svelte';
+	import Loader from 'common/components/Loader.svelte';
+	import IconSuccess from 'common/components/IconSuccess.svelte';
+	import IconError from 'common/components/IconSuccess.svelte';
 
 	import * as api from 'common/api';
 
@@ -11,33 +15,53 @@
 	let error = false;
 	let loggedIn = false;
 
-	function handleRetry() {
+	const handleChangeUsername = (event) => {
+		username = event.target.value;
+	};
+
+	const handleChangePassword = (event) => {
+		password = event.target.value;
+	};
+
+	const handleRetry = () => {
 		error = false;
-	}
+		username = '';
+		password = '';
+	};
 
-	async function handleLogout() {
+	const handleLogout = async () => {
 		loggedIn = false;
-	}
+		username = '';
+		password = '';
+	};
 
-	async function handleSubmit() {
+	const handleSubmit = async () => {
 		if (!password || !username || loading) return;
-
 		loading = true;
-		await api.login();
-		loading = false;
-		loggedIn = true;
-	}
+		try {
+			await api.login();
+			loading = false;
+			loggedIn = true;
+		} catch (err) {
+			loading = false;
+			error = true;
+		}
+	};
 </script>
 
 {#if loggedIn}
 	<h1>Connecté</h1>
-	<div class="card">
-		<Button on:click={handleLogout}>Log out</Button>
+	<div class="card flex flex-col items-center">
+		<IconSuccess class="h-16 w-16 text-green-600" />
+		<h2>Bienvenue <strong>{username}</strong> !</h2>
+		<Button on:click={handleLogout}>Se déconnecter</Button>
 	</div>
 {:else if error}
 	<h1>Erreur</h1>
-	<div class="card">
-		<Button on:click={handleRetry}>Retry</Button>
+	<div class="card flex flex-col items-center">
+		<IconError class="h-16 w-16 text-red-600" />
+		<h2>Une erreur est survenue</h2>
+		<Button on:click={handleRetry}>Nouvelle tentative</Button>
 	</div>
 {:else}
 	<h1>Connexion</h1>
@@ -45,21 +69,32 @@
 		<form id="" action="#" on:submit|preventDefault={handleSubmit}>
 			<TextField
 				label="Email"
-				bind:value={username}
+				value={username}
+				on:input={handleChangeUsername}
 				disabled={loading}
 				placeholder="user@email.com"
 				id="username"
+				autocomplete="username"
 			/>
 			<TextField
+				label="Mot de passe"
+				value={password}
+				on:input={handleChangePassword}
 				type="password"
 				class="mt-2"
-				label="Mot de passe"
-				bind:value={password}
 				disabled={loading}
 				placeholder="••••••"
 				id="password"
+				autocomplete="current-password"
 			/>
-			<Button type="submit" variant="primary" stretched class="mt-5">Connexion</Button>
+			<Button type="submit" variant="primary" stretched class="mt-5">
+				{#if loading}
+					<Loader class="-ml-1 mr-3 h-5 w-5 text-yellow-500" />
+				{/if}
+				Connexion
+			</Button>
 		</form>
 	</div>
 {/if}
+
+<ApiToggle />

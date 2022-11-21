@@ -21,3 +21,7 @@ body {
 h1 {
 	@apply text-gray-700 font-bold text-4xl mb-4;
 }
+
+h2 {
+	@apply text-gray-700 text-2xl my-2;
+}
