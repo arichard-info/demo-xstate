@@ -1,0 +1,11 @@
+{
+    "name": "starter",
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "start": "vite"
+    },
+    "dependencies": {
+        "common": "*"
+    }
+}

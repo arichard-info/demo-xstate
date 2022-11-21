@@ -1,8 +1,8 @@
 <script>
-	import TextField from './../components/TextField.svelte';
-	import Button from './../components/Button.svelte';
+	import TextField from 'common/components/TextField.svelte';
+	import Button from 'common/components/Button.svelte';
 
-	import * as api from './../lib/api';
+	import * as api from 'common/api';
 
 	let username = '';
 	let password = '';
