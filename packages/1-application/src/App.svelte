@@ -30,7 +30,7 @@
 	};
 
 	const handleSubmit = async () => {
-		if (!password || !username || loading) return;
+		if (!password || !username) return;
 		loading = true;
 		try {
 			await api.login();
