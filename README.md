@@ -10,10 +10,10 @@ Start the initial application (no XState, only Svelte)
 npm run start:application
 ```
 
-Start the demo starter application :
+Start the demo livecoding application :
 
 ```bash
-npm run start:starter
+npm run start:livecoding
 ```
 
 Start the demo application :

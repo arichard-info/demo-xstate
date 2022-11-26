@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"scripts": {
 		"start:application": "nx start application",
-		"start:starter": "nx start starter",
+		"start:livecoding": "nx start livecoding",
 		"start:solution": "nx start solution"
 	},
 	"devDependencies": {
