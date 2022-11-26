@@ -1,4 +1,7 @@
 <script>
+	import { interpret } from 'xstate';
+	import loginMachine from './state';
+
 	import ApiToggle from 'common/components/ApiToggle.svelte';
 	import TextField from 'common/components/TextField.svelte';
 	import Button from 'common/components/Button.svelte';
@@ -7,6 +10,8 @@
 	import IconError from 'common/components/IconSuccess.svelte';
 
 	import * as api from 'common/api';
+
+	const loginService = interpret(loginMachine, { devTools: true }).start();
 
 	let username = '';
 	let password = '';
