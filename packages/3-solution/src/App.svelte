@@ -33,10 +33,9 @@
 	<div class="card">
 		<form id="" action="#" on:submit|preventDefault={() => service.send('SUBMIT')}>
 			<TextField
-				label="Email"
+				label="Nom d'utilisateur"
 				value={$service.context.username}
 				on:input={(e) => service.send({ type: 'EDIT_USERNAME', value: e.target.value })}
-				disabled={$service.matches('SUBMITTING')}
 				placeholder="user@email.com"
 				id="username"
 				autocomplete="username"
@@ -47,7 +46,6 @@
 				on:input={(e) => service.send({ type: 'EDIT_PASSWORD', value: e.target.value })}
 				type="password"
 				class="mt-2"
-				disabled={$service.matches('SUBMITTING')}
 				placeholder="••••••"
 				id="password"
 				autocomplete="current-password"

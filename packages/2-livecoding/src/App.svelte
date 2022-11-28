@@ -58,7 +58,7 @@
 	<div class="card">
 		<form id="" action="#" on:submit|preventDefault={handleSubmit}>
 			<TextField
-				label="Email"
+				label="Nom d'utilisateur"
 				value={username}
 				on:input={(event) => (username = event.target.value)}
 				placeholder="user@email.com"
