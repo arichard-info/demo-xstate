@@ -10,6 +10,7 @@
 		"@nrwl/cli": "^15.2.1",
 		"@nrwl/eslint-plugin-nx": "^15.2.1",
 		"@nrwl/workspace": "^15.2.1",
+		"@statelyai/inspect": "^0.2.0",
 		"@sveltejs/adapter-auto": "next",
 		"@sveltejs/kit": "next",
 		"@typescript-eslint/eslint-plugin": "^5.27.0",
