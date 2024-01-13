@@ -1,5 +1,5 @@
 <script>
-	import { interpret } from 'xstate';
+	import { createActor } from 'xstate';
 	import loginMachine from './state';
 
 	import ApiToggle from 'common/components/ApiToggle.svelte';
@@ -11,7 +11,8 @@
 
 	import * as api from 'common/api';
 
-	const loginService = interpret(loginMachine, { devTools: true }).start();
+	const actor = createActor(loginMachine);
+	actor.start();
 
 	let username = '';
 	let password = '';

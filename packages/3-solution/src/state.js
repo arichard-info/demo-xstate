@@ -1,4 +1,4 @@
-import { createMachine, assign } from 'xstate';
+import { createMachine, assign, fromPromise } from 'xstate';
 import * as api from 'common/api';
 
 export default createMachine(
@@ -14,19 +14,20 @@ export default createMachine(
 				on: {
 					SUBMIT: {
 						target: 'submitting',
-						cond: 'isFormValid'
+						guard: 'isFormValid'
 					},
 					EDIT_USERNAME: {
-						actions: assign({ username: (_, event) => event.value })
+						actions: assign({ username: ({ event }) => event.value })
 					},
 					EDIT_PASSWORD: {
-						actions: assign({ password: (_, event) => event.value })
+						actions: assign({ password: ({ event }) => event.value })
 					}
 				}
 			},
 			submitting: {
 				invoke: {
-					src: api.login,
+					src: 'apiLogin',
+					input: ({ context }) => context,
 					onDone: 'confirmation',
 					onError: 'error'
 				}
@@ -49,7 +50,12 @@ export default createMachine(
 			resetForm: assign(() => ({ username: '', password: '' }))
 		},
 		guards: {
-			isFormValid: (ctx) => Boolean(ctx.username && ctx.password)
+			isFormValid: ({ context }) => Boolean(context.username && context.password)
+		},
+		actors: {
+			apiLogin: fromPromise(async ({ input }) =>
+				api.login({ username: input.username, password: input.password })
+			)
 		}
 	}
 );
