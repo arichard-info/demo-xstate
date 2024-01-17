@@ -1,6 +1,5 @@
 <script>
-	import { createActor } from 'xstate';
-	import { createBrowserInspector } from '@statelyai/inspect';
+	import { createActor } from "xstate";
 
 	import ApiToggle from 'common/components/ApiToggle.svelte';
 	import TextField from 'common/components/TextField.svelte';
@@ -9,13 +8,9 @@
 	import IconSuccess from 'common/components/IconSuccess.svelte';
 	import IconError from 'common/components/IconSuccess.svelte';
 
-	import { inspect } from "inspector/browser"
-
 	import machine from './state';
 
-
-	const inspector = createBrowserInspector();
-	const actor = createActor(machine, { inspect: inspector.inspect });
+	const actor = createActor(machine);
 	actor.start();
 </script>
 

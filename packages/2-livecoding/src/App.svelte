@@ -1,4 +1,5 @@
 <script>
+	import { createBrowserInspector } from '@statelyai/inspect';
 	import { createActor } from 'xstate';
 	import loginMachine from './state';
 
@@ -11,7 +12,8 @@
 
 	import * as api from 'common/api';
 
-	const actor = createActor(loginMachine);
+	const inspector = createBrowserInspector();
+	const actor = createActor(loginMachine, { inspect: inspector.inspect });
 	actor.start();
 
 	let username = '';
