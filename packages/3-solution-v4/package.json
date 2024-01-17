@@ -1,0 +1,12 @@
+{
+    "name": "solution-v4",
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "start": "vite"
+    },
+    "dependencies": {
+        "common": "*",
+        "xstate": "^4.38.3"
+    }
+}
