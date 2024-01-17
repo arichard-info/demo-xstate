@@ -8,5 +8,8 @@
     "dependencies": {
         "common": "*",
         "xstate": "^4.38.3"
+    },
+    "devDependencies": {
+        "@xstate/inspect": "^0.8.0"
     }
 }

@@ -4,7 +4,8 @@
 	"scripts": {
 		"start:application": "nx start application",
 		"start:livecoding": "nx start livecoding",
-		"start:solution": "nx start solution"
+		"start:solution": "nx start solution",
+		"start:solution-v4": "nx start solution-v4"
 	},
 	"devDependencies": {
 		"@nrwl/cli": "^15.2.1",
