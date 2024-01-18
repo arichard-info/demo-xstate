@@ -34,6 +34,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@fontsource/lexend": "^5.0.18",
 		"@fontsource/lexend-tera": "^5.0.8",
 		"@fontsource/roboto-mono": "^5.0.16",
 		"classnames": "^2.3.1",

@@ -3,8 +3,6 @@
 	import TextField from 'common/components/TextField.svelte';
 	import Button from 'common/components/Button.svelte';
 	import Loader from 'common/components/Loader.svelte';
-	import IconSuccess from 'common/components/IconSuccess.svelte';
-	import IconError from 'common/components/IconSuccess.svelte';
 
 	import * as api from 'common/api';
 
@@ -36,21 +34,21 @@
 </script>
 
 {#if loggedIn}
-	<h1>Connecté</h1>
-	<div class="card flex flex-col items-center">
-		<IconSuccess class="h-16 w-16 text-green-600" />
+	<div class="card">
+		<span class="emoji">🍻</span>
+		<h1>Vous êtes connecté !</h1>
 		<h2>Bienvenue <strong>{username}</strong> !</h2>
 	</div>
 {:else if error}
-	<h1>Erreur</h1>
-	<div class="card flex flex-col items-center">
-		<IconError class="h-16 w-16 text-red-600" />
+	<div class="card">
+		<span class="emoji">😕</span>
+		<h1>Erreur</h1>
 		<h2>Une erreur est survenue</h2>
 		<Button on:click={handleRetry}>Nouvelle tentative</Button>
 	</div>
 {:else}
-	<h1>Connexion</h1>
 	<div class="card">
+		<h1>Connexion</h1>
 		<form id="" action="#" on:submit|preventDefault={handleSubmit}>
 			<TextField
 				label="Nom d'utilisateur"
@@ -72,7 +70,7 @@
 			/>
 			<Button type="submit" variant="primary" stretched class="mt-5">
 				{#if loading}
-					<Loader class="-ml-1 mr-3 h-5 w-5 text-yellow-500" />
+					<Loader class="-ml-1 mr-3 h-5 w-5 text-blue-600" />
 				{/if}
 				Connexion
 			</Button>

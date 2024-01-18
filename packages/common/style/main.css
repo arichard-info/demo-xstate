@@ -5,9 +5,9 @@
 body {
 	background-image: url(./grid.jpg);
 	background-size: 1600px;
-	@apply bg-gray-200;
+	background-color: #f2f6ff;
 	height: 100vh;
-	padding-top: 100px;
+	display: flex;
 }
 
 #app {
@@ -16,14 +16,22 @@ body {
 	margin: auto;
 }
 
+.emoji {
+	@apply text-6xl mb-6;
+}
+
 .card {
-	@apply border border-black bg-white rounded p-4;
+	@apply bg-white rounded-lg p-10 shadow-md flex flex-col items-center;
 }
 
 h1 {
-	@apply font-title text-black font-bold text-4xl mb-4;
+	@apply font-title text-black font-bold text-3xl;
 }
 
 h2 {
-	@apply text-gray-700 text-2xl my-2;
+	@apply text-gray-700 text-2xl mt-2 mb-6;
+}
+
+form {
+	@apply w-full mt-12;
 }
