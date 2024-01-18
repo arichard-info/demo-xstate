@@ -3,13 +3,15 @@
     "version": "0.0.0",
     "type": "module",
     "scripts": {
-        "start": "vite"
+        "start": "vite",
+        "test": "vitest run"
     },
     "dependencies": {
         "common": "*",
         "xstate": "^4.38.3"
     },
     "devDependencies": {
-        "@xstate/inspect": "^0.8.0"
+        "@xstate/inspect": "^0.8.0",
+        "@xstate/test": "^0.5.1"
     }
 }
