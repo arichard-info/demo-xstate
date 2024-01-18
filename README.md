@@ -16,8 +16,14 @@ Start the demo livecoding application :
 npm run start:livecoding
 ```
 
-Start the demo application :
+Start the demo application (XState v5) :
 
 ```
 npm run start:solution
+```
+
+Start the demo application (XState v4) :
+
+```
+npm run start:solution-v4
 ```
