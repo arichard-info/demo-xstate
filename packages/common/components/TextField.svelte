@@ -23,7 +23,7 @@
 		@apply block text-gray-700 font-bold mb-2 text-lg;
 	}
 	input {
-		@apply bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight;
+		@apply bg-gray-100 appearance-none border-2 border-gray-100 rounded-md w-full py-4 px-4 text-gray-700 leading-tight;
 	}
 
 	input:focus {

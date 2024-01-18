@@ -1,14 +1,7 @@
-const defaultTheme = require('tailwindcss/defaultTheme');
+const tailwindPreset = require('common/style/tailwindPreset.cjs');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}', './../common/**/*.{html,js,svelte,ts}'],
-	theme: {
-		extend: {
-			fontFamily: {
-				sans: ['Inter', ...defaultTheme.fontFamily.sans]
-			}
-		}
-	},
-	plugins: []
+	presets: [tailwindPreset]
 };

@@ -1,6 +1,6 @@
 import { inspect } from '@xstate/inspect';
 
-import 'common/style/main.css';
+import 'common/style';
 import App from './App.svelte';
 
 inspect({
