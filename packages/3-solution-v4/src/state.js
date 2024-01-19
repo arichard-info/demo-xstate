@@ -1,6 +1,8 @@
 import { createMachine, assign } from 'xstate';
 import * as api from 'common/api';
 
+import { expect, test, describe } from 'vitest';
+
 export default createMachine(
 	{
 		id: 'login',
@@ -22,6 +24,12 @@ export default createMachine(
 					EDIT_PASSWORD: {
 						actions: assign({ password: (_, event) => event.value })
 					}
+				},
+				meta: {
+					test: async (screen) => {
+						expect(screen.getByLabelText("Nom d'utilisateur")).toBeInTheDocument()
+						expect(screen.getByLabelText("Mot de passe")).toBeInTheDocument()
+					},
 				}
 			},
 			submitting: {
@@ -29,10 +37,20 @@ export default createMachine(
 					src: api.login,
 					onDone: 'confirmation',
 					onError: 'error'
+				},
+				meta: {
+					test: async (screen) => {
+					  return true;
+					},
 				}
 			},
 			confirmation: {
-				type: 'final'
+				type: 'final',
+				meta: {
+					test: async (screen) => {
+					  return true;
+					},
+				}
 			},
 			error: {
 				on: {
@@ -40,6 +58,11 @@ export default createMachine(
 						target: 'editing',
 						actions: 'resetForm'
 					}
+				},
+				meta: {
+					test: async (screen) => {
+					  return true;
+					},
 				}
 			}
 		}
@@ -49,7 +72,7 @@ export default createMachine(
 			resetForm: assign(() => ({ username: '', password: '' }))
 		},
 		guards: {
-			isFormValid: (ctx) => Boolean(ctx.username && ctx.password)
+			isFormValid: (ctx) => ctx.username !== "" && ctx.password !== ""
 		}
 	}
 );
