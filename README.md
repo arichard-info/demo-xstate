@@ -27,3 +27,9 @@ Start the demo application (XState v4) :
 ```
 npm run start:solution-v4
 ```
+
+Model-based testing (XState v4) :
+
+```
+npm run test:solution-v4
+```

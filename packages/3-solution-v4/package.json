@@ -1,15 +1,18 @@
 {
-    "name": "solution-v4",
-    "version": "0.0.0",
-    "type": "module",
-    "scripts": {
-        "start": "vite"
-    },
-    "dependencies": {
-        "common": "*",
-        "xstate": "^4.38.3"
-    },
-    "devDependencies": {
-        "@xstate/inspect": "^0.8.0"
-    }
+	"name": "solution-v4",
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"start": "vite",
+		"test": "vitest run"
+	},
+	"dependencies": {
+		"common": "*",
+		"xstate": "^4.38.3"
+	},
+	"devDependencies": {
+		"@testing-library/jest-dom": "^6.2.0",
+		"@xstate/inspect": "^0.8.0",
+		"@xstate/test": "0.4.2"
+	}
 }
