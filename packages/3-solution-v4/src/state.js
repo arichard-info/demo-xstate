@@ -1,7 +1,7 @@
 import { createMachine, assign } from 'xstate';
 import * as api from 'common/api';
 
-import { expect, test, describe } from 'vitest';
+import { expect } from 'vitest';
 
 export default createMachine(
 	{
@@ -27,20 +27,24 @@ export default createMachine(
 				},
 				meta: {
 					test: async (screen) => {
-						expect(screen.getByLabelText("Nom d'utilisateur")).toBeInTheDocument()
-						expect(screen.getByLabelText("Mot de passe")).toBeInTheDocument()
+						expect(screen.getByLabelText("Nom d'utilisateur")).toBeInTheDocument();
+						expect(screen.getByLabelText("Mot de passe")).toBeInTheDocument();
+						expect(screen.getByRole("button")).toBeInTheDocument();
 					},
 				}
 			},
 			submitting: {
 				invoke: {
-					src: api.login,
+					src: "login",
 					onDone: 'confirmation',
 					onError: 'error'
 				},
 				meta: {
 					test: async (screen) => {
-					  return true;
+						expect(screen.getByLabelText("Nom d'utilisateur")).toBeInTheDocument();
+						expect(screen.getByLabelText("Mot de passe")).toBeInTheDocument();
+						expect(screen.getByRole("button")).toBeInTheDocument();
+						expect(screen.getByTestId("loader")).toBeInTheDocument();
 					},
 				}
 			},
@@ -48,7 +52,7 @@ export default createMachine(
 				type: 'final',
 				meta: {
 					test: async (screen) => {
-					  return true;
+					  	expect(screen.getByText("Vous êtes connecté !")).toBeInTheDocument();
 					},
 				}
 			},
@@ -61,7 +65,8 @@ export default createMachine(
 				},
 				meta: {
 					test: async (screen) => {
-					  return true;
+						expect(screen.getByText("Une erreur est survenue")).toBeInTheDocument();
+						expect(screen.getByRole("button")).toBeInTheDocument();
 					},
 				}
 			}
@@ -72,7 +77,10 @@ export default createMachine(
 			resetForm: assign(() => ({ username: '', password: '' }))
 		},
 		guards: {
-			isFormValid: (ctx) => ctx.username !== "" && ctx.password !== ""
+			isFormValid: (ctx) => (ctx.username !== "" && ctx.password !== "")
+		},
+		services: {
+			login: (ctx) => api.login({ username: ctx.username, password: ctx.password })
 		}
 	}
 );
