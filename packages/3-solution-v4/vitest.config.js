@@ -7,7 +7,7 @@ export default mergeConfig(
 		test: {
 			globals: true,
 			reporters: ['verbose'],
-			environment: 'jsdom',
+			// environment: 'jsdom',
 			setupFiles: ['./setupTest.js']
 		}
 	})

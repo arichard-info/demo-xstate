@@ -1,13 +1,14 @@
 <script>
-	import { interpret } from 'xstate';
+	import { createMachine, interpret } from 'xstate';
 
 	import ApiToggle from 'common/components/ApiToggle.svelte';
 	import TextField from 'common/components/TextField.svelte';
 	import Button from 'common/components/Button.svelte';
 	import Loader from 'common/components/Loader.svelte';
 
-	import machine from './state';
+	import { machineDefinition } from './state';
 
+	const machine = createMachine(machineDefinition);
 	const service = interpret(machine, { devTools: true }).start();
 </script>
 
